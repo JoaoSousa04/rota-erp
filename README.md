@@ -1,29 +1,42 @@
 # Rota ERP
 
-Plataforma demonstrativa para planejar e acompanhar implantações de sistemas em múltiplas unidades. O projeto transforma em produto de portfólio experiências comuns em operações de implantação: etapas, responsáveis, pendências, registros e indicadores de andamento.
+Plataforma web demonstrativa para planejar e acompanhar implantações de sistemas ERP em múltiplas unidades. O projeto reúne etapas, tarefas, responsáveis, prazos e impedimentos em um só lugar.
 
-> Projeto independente para fins de estudo e portfólio. Usa somente organizações, unidades e dados fictícios; não representa nem divulga sistemas, clientes, processos ou informações confidenciais de qualquer empresa.
+> Projeto independente para estudo e portfólio. Todas as organizações, unidades e informações usadas nas demonstrações serão fictícias.
 
 ## Objetivo do MVP
 
-Permitir que uma pessoa gestora acompanhe uma implantação, veja o progresso de cada unidade e identifique tarefas atrasadas ou impedimentos. Integrantes das unidades atualizam suas próprias tarefas e registram impedimentos.
+Permitir que uma pessoa gestora acompanhe uma implantação, compare o progresso das unidades e identifique tarefas atrasadas ou impedimentos. Integrantes das unidades poderão atualizar suas tarefas e registrar problemas que precisam de atenção.
 
-## Stack planejada
+## Tecnologias
 
-- PHP 8.3+ e Laravel 13
-- Blade, HTML e CSS na interface inicial; JavaScript simples quando trouxer benefício claro
+- **Back-end:** PHP 8.3+ e Laravel 13
+- **Interface:** Blade, HTML e CSS; JavaScript quando necessário
+- **Banco de dados:** PostgreSQL
+- **Versionamento e colaboração:** Git e GitHub
+- **Etapas futuras:** testes automatizados, GitHub Actions, Docker e hospedagem
+
+## Estado atual
+
+- Aplicação Laravel 13 criada na pasta `app/`, usando Blade.
+- Banco PostgreSQL local configurado e migrations iniciais executadas.
+- Aplicação iniciando localmente com `composer run dev`.
+- Repositório Git configurado com remoto no GitHub.
+
+O projeto está sendo desenvolvido como uma trilha prática. Cada etapa será explicada e aplicada em uma entrega pequena, para que os conceitos de Laravel, SQL, Git e hospedagem sejam aprendidos durante a construção.
+
+## Executar localmente
+
+### Pré-requisitos
+
+- PHP 8.3 ou superior
+- Composer
+- Node.js e npm
 - PostgreSQL
-- Git e GitHub para histórico, issues e pull requests
-- GitHub Actions para integração contínua
-- Docker e Render para empacotamento e publicação, numa etapa posterior
 
-## Situação
+### Configuração
 
-O ambiente local está preparado e o esqueleto Laravel 13 com Blade foi criado na pasta `app/`. O projeto será desenvolvido como uma trilha guiada: primeiro PHP/Laravel, HTML e SQL; Git/GitHub em passos pequenos; testes, automação, Docker e hospedagem entram depois. A pasta `Microsoft/Windows/PowerShell/ModuleAnalysisCache` já existia no workspace e é um arquivo local do ambiente; não faz parte do produto.
-
-## Configuração local
-
-O modelo [`.env.example`](.env.example) contém valores de demonstração e nenhuma senha real. Para criar a configuração local da aplicação, copie o modelo para a pasta Laravel e gere a chave da aplicação:
+O arquivo [`.env.example`](.env.example) contém valores de exemplo, sem senhas reais. Na primeira configuração, copie-o para a pasta da aplicação e gere a chave local do Laravel:
 
 ```powershell
 Copy-Item .env.example app/.env
@@ -31,15 +44,24 @@ Set-Location app
 php artisan key:generate
 ```
 
-Preencha `DB_PASSWORD` apenas no arquivo `app/.env`, com a senha local do PostgreSQL. Nunca versione `app/.env` nem compartilhe a senha.
+Configure os dados do PostgreSQL em `app/.env`. A senha deve ficar somente nesse arquivo local; não a publique no GitHub.
 
-## Próximos passos
+Para criar as tabelas do banco e iniciar a aplicação:
 
-1. Configurar a conexão PostgreSQL no arquivo local `app/.env`.
-2. Iniciar a aplicação e conhecer a rota e a view inicial do Blade.
-3. Versionar a aplicação e publicar a primeira versão no GitHub.
-4. Desenvolver o MVP em pequenas entregas documentadas no próprio repositório.
+```powershell
+php artisan migrate
+composer run dev
+```
 
-## Privacidade
+Com o servidor em execução, acesse `http://127.0.0.1:8000` no navegador.
 
-O currículo em PDF e qualquer dado real de clientes ou empregadores não devem ser versionados nem usados como dados de demonstração. O `.gitignore` exclui o PDF do currículo por padrão.
+## Privacidade e segurança
+
+Use apenas dados fictícios nas demonstrações. Credenciais e configurações específicas do computador ficam em `app/.env`, que não deve ser enviado ao GitHub. O arquivo `.env.example` serve como modelo e não deve conter senhas reais.
+
+## Próximas etapas
+
+1. Entender como a rota Laravel carrega a página inicial Blade.
+2. Substituir a tela padrão por uma página inicial do Rota ERP.
+3. Planejar as tabelas e relações do banco para organizações, unidades e implantações.
+4. Implementar as primeiras funcionalidades em pequenas entregas versionadas.
