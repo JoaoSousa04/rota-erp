@@ -8,6 +8,34 @@ Plataforma web demonstrativa para planejar e acompanhar implantações de sistem
 
 Permitir que uma pessoa gestora acompanhe uma implantação, compare o progresso das unidades e identifique tarefas atrasadas ou impedimentos. Integrantes das unidades poderão atualizar suas tarefas e registrar problemas que precisam de atenção.
 
+## Modelo de dados (MVP)
+
+O diagrama apresenta as relações principais do modelo inicial. Os nomes das tabelas estão em inglês; os papéis exibidos na aplicação serão **Gerente**, **Supervisor** e **Técnico**.
+
+```mermaid
+erDiagram
+    ORGANIZATIONS ||--o{ UNITS : possui
+    ORGANIZATIONS ||--o{ DEPLOYMENTS : acompanha
+    USERS ||--o{ ORGANIZATION_USER : participa
+    ORGANIZATIONS ||--o{ ORGANIZATION_USER : possui
+    DEPLOYMENTS ||--o{ DEPLOYMENT_UNITS : inclui
+    UNITS ||--o{ DEPLOYMENT_UNITS : participa
+    DEPLOYMENT_UNITS ||--o{ TASKS : possui
+    USERS o|--o{ TASKS : atribuido
+    DEPLOYMENT_UNITS ||--o{ BLOCKERS : registra
+    USERS ||--o{ BLOCKERS : reporta
+    USERS o|--o{ BLOCKERS : resolve
+    USERS ||--o{ ACTIVITY_LOGS : registra
+```
+
+### Regras principais
+
+- `organization_user` liga usuários às organizações e guarda o papel de cada pessoa (`manager`, `supervisor` ou `technician`), exibido na aplicação como Gerente, Supervisor ou Técnico.
+- `deployment_units` liga uma implantação às unidades participantes e guarda o andamento e as datas previstas e reais de cada unidade.
+- Tarefas e impedimentos pertencem a uma participação específica em `deployment_units`. O responsável e o prazo da tarefa podem ser definidos depois.
+- Um impedimento aberto pode coexistir com a unidade em andamento, pois o problema pode afetar apenas parte do trabalho.
+- `activity_logs` registra quem fez a alteração, o item afetado, os valores anterior e novo e quando ocorreu. `subject_type` e `subject_id` identificam o tipo e o registro alterado.
+
 ## Tecnologias
 
 - **Back-end:** PHP 8.3+ e Laravel 13
@@ -61,7 +89,7 @@ Use apenas dados fictícios nas demonstrações. Credenciais e configurações e
 
 ## Próximas etapas
 
-1. Entender como a rota Laravel carrega a página inicial Blade.
-2. Substituir a tela padrão por uma página inicial do Rota ERP.
-3. Planejar as tabelas e relações do banco para organizações, unidades e implantações.
-4. Implementar as primeiras funcionalidades em pequenas entregas versionadas.
+1. Revisar e concluir o modelo de dados documentado no README.
+2. Criar as migrations e os models do esquema inicial.
+3. Preparar dados fictícios para demonstração.
+4. Implementar os primeiros cadastros em pequenas entregas versionadas.
