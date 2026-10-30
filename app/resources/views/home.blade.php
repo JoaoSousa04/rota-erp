@@ -6,7 +6,6 @@
     <title>Rota ERP</title>
 </head>
 <body>
-    
     <main>
         <h1>Rota ERP</h1>
         <p>
