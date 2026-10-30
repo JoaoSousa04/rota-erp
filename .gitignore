@@ -1,0 +1,33 @@
+# Segredos e configurações locais
+.env
+.env.*
+!/.env.example
+auth.json
+
+# Documentos de planejamento e modelo de ambiente mantidos apenas localmente
+/PLANO-DE-EXECUCAO.md
+/app/.env.example
+
+# Dependências e arquivos gerados pelo Laravel / PHP
+/vendor/
+/node_modules/
+/public/build/
+/public/hot
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*.php
+
+# Ferramentas e sistema operacional
+.phpunit.cache/
+.phpunit.result.cache
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Microsoft/Windows/PowerShell/ModuleAnalysisCache
+
+# O currículo é apenas material de referência e não deve ir para o GitHub
+/Curriculum-*.pdf
