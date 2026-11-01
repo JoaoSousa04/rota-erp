@@ -11,4 +11,9 @@ class Organization extends Model
     {
         return $this->hasMany(Unit::class);
     }
+
+    public function deployments(): HasMany
+    {
+        return $this->hasMany(Deployment::class);
+    }
 }
